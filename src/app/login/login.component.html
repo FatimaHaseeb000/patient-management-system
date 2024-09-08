@@ -1,0 +1,61 @@
+
+<!--<div class="container w-100">
+    <div class="row w-100">
+        <div class="col offset-11">
+            <button class=" w-100 btn btn-md btn-info " (click)="goBackToMainPage()">Back To Homepage</button>
+        </div>
+    </div>
+</div>-->
+<div *ngIf="isLoggedIn==false" class="container m-5 ">
+    
+    <div class="row justify-content-center">
+        
+        <div class="col col-sm-4" id="loginFormAndHeading">
+            <h2>Login</h2>
+            <form [formGroup]="loginForm"  class="">
+                <div class="row my-4">
+                    <label for="userId">
+                        <!-- <span class="errorMessage" *ngIf="this.loginForm.get('userId')?.untouched">*</span> -->
+                        Email/UserID: 
+                    </label>
+                    <input type="text" id="userId" formControlName="userId"><br>
+
+                    
+                    
+                    
+                    <!-- <span class="errorMessage" *ngIf="this.loginForm.get('userId')?.dirty && (this.loginForm.get('userId')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+                    <span class="errorMessage text-danger" *ngIf="this.loginForm.get('userId')?.touched && (this.loginForm.get('userId')?.value=='')">This field cannot remain empty!<br></span>
+
+                    <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">This field cannot remain empty!</span> -->
+
+                </div>
+                <div class="row my-4">
+                    <label for="password">
+                        <!-- <span class="errorMessage" *ngIf="this.loginForm.get('password')?.untouched">*</span> -->
+                        Password: 
+                    </label>
+                    <input type="password" id="password" formControlName="password"><br>
+
+                    
+                    
+                    
+                    <!-- <span class="errorMessage" *ngIf="this.loginForm.get('password')?.dirty && (this.loginForm.get('password')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+                    <span class="errorMessage text-danger" *ngIf="this.loginForm.get('password')?.touched && (this.loginForm.get('password')?.value=='')">This field cannot remain empty!<br></span>
+
+                    <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">This field cannot remain empty!</span> -->
+
+                </div>
+                <!-- <button id="loginButton" (click)="login()">Login</button> -->
+                <button class="btn btn-primary" disabled id="loginButton" (click)="login()" >Submit</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- <div *ngIf="isLoggedIn==true">
+    <span>A user is currently logged in. If you want to log in another user, first 
+        <a routerLink="" (click)="logout()">Logout</a>.
+    </span>
+</div> -->
+
+

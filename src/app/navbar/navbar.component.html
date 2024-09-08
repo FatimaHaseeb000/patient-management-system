@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">Patient Information</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <!-- is href better or  router link for lazy loading -->
+            <a class="nav-link active" aria-current="page"  href="patient-form">Add New Patient</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  href="patient-list">View Patient List</a>
+          </li>
+          <!-- <li *ngIf="!isLoggedIn()" class="nav-item ">
+            <a class="nav-link hidden " aria-hidden="true" href="Login">Login</a>
+          </li> -->
+          <li *ngIf="isLoggedIn()" class="nav-item ">
+            <a class="nav-link " id='logoutNavButton'  (click)="logOut()" href="Login">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

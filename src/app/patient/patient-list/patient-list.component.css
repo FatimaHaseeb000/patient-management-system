@@ -1,0 +1,121 @@
+ul
+{
+   list-style-type: none; 
+}
+li
+{
+    padding-bottom: 10px;
+    font-size: larger;
+}
+#allRecords
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+#recordItem
+{
+    /* background-color: rgb(183, 183, 34); */
+    border: 0.5px solid black;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding-left: 10%;
+    width: 80%;
+    /* max-width: 90%;
+    min-width: 90%; */
+    ;
+}
+button
+{
+    background-color: white;
+    border: 2px solid black;
+    font-size: medium;
+    width: auto;
+    border-radius: 10px;
+    padding: 5px 10px;
+   
+}
+/* pagination-controls{
+    position:absolute;
+    bottom:0;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+} */
+#patient-data
+{
+    margin: 10px 10px;
+    
+}
+
+/* splice {??? */
+
+#update-fields
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:auto;
+    padding: 50px;
+    /* margin-left: 100px;
+    margin-right: 100px; */
+    width: auto;
+    background-color: darkgrey;
+
+}
+label
+{
+    font-weight: bold;
+    font-size: large;
+}
+#update-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#update-buttons buttons
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+footer
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input
+{
+    padding: 5px;
+    font-size: medium;
+
+}
+#collapseDiv
+{
+    /* background-color: darkgray; */
+    border: 1px black solid;
+    border-radius: 4px;
+}
+.btn:hover
+{
+    /* background-color: rgb(100, 100, 189);
+    color: white; */
+}
+.position-relative
+{
+    position: absolute;
+    top: 100%; /* Position right below the button */
+    left: 0;
+    z-index: 100;
+}
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }

@@ -1,0 +1,329 @@
+
+<h1 class="my-3">Patient Records</h1>
+<!--<div class="container w-100">
+    <div class="row w-100">
+        <div class="col offset-11">
+            <button class=" w-100 btn btn-md btn-info " (click)="goBackToMainPage()">Back To Homepage</button>
+        </div>
+    </div>
+</div>-->
+<div>
+    <ng-component *ngIf="(recordsView.length==0)"><h4>There are no records to display!</h4></ng-component>
+   
+   <div class="container mt-3">
+        <table class="table table-striped">
+        <!-- <div class="table"> -->
+
+            <thead >
+                <tr class="row">
+                    <th class="col col-2">MRN</th>
+                    <th class="col col-3">Name</th>
+                    <th class="col col-2">Gender</th>
+                    <th class="col col-3">Email</th>
+                </tr>
+            </thead>
+    <!-- <div id="allRecords" *ngFor="let record of recordsView | paginate:{itemsPerPage: items, currentPage:page, totalItems: count} ; let i=index "> 
+        <div id="recordItem">
+            <div id="patient-data"> -->
+                <!-- <tr class="row" rowspan="2" *ngFor="let record of recordsView | paginate:{itemsPerPage: items, currentPage:page, totalItems: count} ; let i=index ">
+                   
+                </tr> -->
+            <tbody>
+                <tr class="row" *ngFor="let record of recordsView | paginate:{itemsPerPage: items, currentPage:page, totalItems: count} ; let i=index ">
+                    <td class="col col-2">{{record.mnr}}</td>
+                    <td class="col col-3">{{record.firstName}} {{record.lastName}}</td>
+                    <td class="col col-2">{{record.gender}}</td>
+                    <td class="col col-3">{{record.email}}</td>
+                    <!-- <td class="col col-3"> -->
+                    <td class="col col-2">
+                        <!-- <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapseDiv"  (click)="collapseTableFunction(i)">View Details</button> 
+                        [attr.data-bs-target]="'#collapseDiv'+i"-->
+                        <button class="btn" data-bs-toggle="collapse" data-bs-target="#collapseDiv"  (click)="collapseTableFunction(i)"><i class="bi bi-eye-fill"></i></button>
+                        <!-- <i class="bi bi-eye-fill" data-bs-toggle="collapse" data-bs-target="#collapseDiv"  (click)="collapseTableFunction(i)" ></i> -->
+                        
+                        <!-- <div class="col collapse collapse-horizontal mt-3"id="collapseDiv" > -->
+                        <!-- <div class="col collapse collapse-horizontal mt-3"id="collapseDiv" [attr.id]="'collapseDiv'+i">
+                            <div class="row offset-7 p-2">
+                                <button class="button btn px-3"(click)="editRecord()" id="editButton">Edit</button>
+                                <button class="button btn px-3" id="updateButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv" (click)="sendSignal()">Update</button>
+                                <button class="button btn px-3"(click)="onDelete(collapseIndexId)" id="deleteButton">Delete Record</button>
+                                <button class="button btn px-3" id="closeButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv"> X </button>
+                            </div>
+                            <div class="container mt-2" >
+                                <div class="row ">
+                                    <app-patient-form [setValueIndex]="collapseIndexId" [isReadMode]="!letEdit" (canUpdate)="handleUpdate($event)" [updateRecord]="updateRecord" ></app-patient-form>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- *ngIf="record.mnr===recordsView"
+                        *ngIf="collapseIndexId===recordsView[i].id" -->
+                        
+                    </td>
+                    
+                    <!-- <span  class="collapse collapse-horizontal"id="collapseDiv">Hello</span> -->
+                    <!-- <span *ngIf="index==collapseIndexId" class="collapse collapse-horizontal"id="collapseDiv">Hello</span> -->
+                </tr>
+                <!-- <tr>
+                    <td [attr.colspan]="5">
+                        <div class="col collapse collapse-horizontal mt-3"id="collapseDiv" > | paginate:{itemsPerPage: items, currentPage:page, totalItems: count}
+                        <div 
+                        *ngFor="let record of recordsView  ; let i=index "
+                        class="col collapse collapse-horizontal mt-3"
+                        id="collapseDiv" 
+                        [attr.id]="'collapseDiv'+i"
+                        >
+                            <div class="row offset-7 p-2">
+                                <button class="button btn px-3"(click)="editRecord()" id="editButton">Edit</button>
+                                <button class="button btn px-3" id="updateButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv" (click)="sendSignal()">Update</button>
+                                <button class="button btn px-3"(click)="onDelete(collapseIndexId)" id="deleteButton">Delete Record</button>
+                                <button class="button btn px-3" id="closeButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv"> X </button>
+                            </div>
+                            <div class="container mt-2" >
+                                <div class="row ">
+                                    <app-patient-form [setValueIndex]="collapseIndexId" [isReadMode]="!letEdit" (canUpdate)="handleUpdate($event)" [updateRecord]="updateRecord" ></app-patient-form>
+                                </div>
+                            </div>
+                        </div>
+                            *ngIf="record.mnr===recordsView"
+                        *ngIf="collapseIndexId===recordsView[i].id" 
+
+
+                    </td>
+
+                </tr> -->
+            </tbody>
+                
+                
+                
+                <!-- <tr class="row" class="collapse collapse-horizontal"id="collapseDiv">
+                    <td colspan="5">
+                        <table>
+                            <thead>
+                                <tr class="row">
+                                    <td class="column">A</td>
+                                    <td>B</td>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </td>
+                </tr> -->
+                <!-- <div class="collapse collapse-horizontal"id="collapseDiv">
+                    <div class="card card-body" > -->
+                        
+                    <!-- </div> -->
+                <!-- </div> -->
+            
+            <!-- </div> -->
+        </table>
+        <!-- *ngFor="let record of recordsView  ; let i=index " 
+            [attr.id]="'collapseDiv'+collapseIndexNo"-->
+        <div 
+        
+        class="col collapse collapse-horizontal mt-3 position-relative"
+        id="collapseDiv" 
+        
+        >
+            <div class="row offset-7 p-2">
+                <!-- <mat-icon>delete</mat-icon> -->
+                <button class="button btn px-3"(click)="editRecord()" id="editButton">Edit</button>
+                <button class="button btn px-3" id="updateButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv" (click)="sendSignal()">Update</button>
+                <button class="button btn px-3"(click)="onDelete(collapseIndexId)" id="deleteButton"><i class="bi bi-trash"></i></button>
+                <button class="button btn px-3" id="closeButton" data-bs-toggle="collapse" data-bs-target="#collapseDiv"> X </button>
+            </div>
+            <div class="container mt-2" >
+                <div class="row ">
+                    <app-patient-form [setValueIndex]="collapseIndexId" [isReadMode]="!letEdit" (canUpdate)="handleUpdate($event)" [updateRecord]="updateRecord" ></app-patient-form>
+                </div>
+            </div>
+        </div>
+   </div>
+            
+            
+                <!-- <table class="table">
+                    <tr>
+                        <thead  ><td>MRN</td></thead>
+                        <td>{{recordsView[collapseIndexId]?.mnr}}</td>
+                    </tr>
+                </table> -->
+                <!-- <div class="container mt-2">
+                    <div class="row ">
+                        <app-patient-form [setValueIndex]="collapseIndexId" [isReadMode]="!letEdit" (canUpdate)="handleUpdate($event)" [updateRecord]="updateRecord" ></app-patient-form>
+                    </div>
+                </div> -->
+                
+                <!-- <button type="submit">Apply Changes</button> -->
+            
+                <!-- <ul>
+                    <li><label>MNR#  {{record.mnr}}</label></li>
+                    <li><label>Name:</label>  {{record.firstName}}  {{record.lastName}}</li>
+                    <li><label>Gender:</label>  {{record.gender}}</li>
+                    <li><label>Email:</label>  {{record.email}}</li> -->
+                    <!-- <li><label>Contact No.:</label>+{{record.countryCodeForContact}}  {{record.contactNo}}</li>
+                    <li><label>Emergency Contact No:</label>  +{{record.countryCodeForEmerContact}} {{record.emergencyContactNo}}</li>
+                    <li><label>Address:  </label> {{record.street}}, {{record.area}}, {{record.city}}, {{record.state}}, {{record.country}}, {{record.zipcode}}</li>
+                    <button type="button" (click)="(letEdit[i]=!letEdit[i]) && getMNR(record.mnr)">Edit</button> -->
+                    <!-- <button *ngIf="visibleButton"type="button" #editButton (click)="(letEdit[i]=!letEdit[i]) && visibleButton=!visibleButton" >Edit</button> -->
+                    <!-- <button type="button" #editButton (click)="(letEdit[i]=!letEdit[i]) && visibleButton=!visibleButton" >Edit</button>
+                    <button type="button" (click)="onDelete(recordsView[i].id)">Delete</button>
+                </ul> -->
+</div>
+        <!-- <div [ngIf]="[(letEdit) && ({{record.mnr}}==i)]"> -->
+            <!-- <div *ngIf="letEdit[i]"> -->
+                <!-- <div>
+                    <app-patient-form></app-patient-form>
+                    
+                </div> -->
+                
+                    
+                
+                        <!-- <div id="update-fields">
+                            
+                            <label for="firstName">First Name: </label>
+                            <input type="text" id="firstName"  [(ngModel)]="recordsView[i].firstName"><br>
+                             <input type="text" id="firstName"  [(ngModel)]="recordsView[index].firstName"><br> -->
+                        
+                            <!-- <label for="lastName">Last Name: </label>
+                            <input type="text" id="lastName"  [(ngModel)]="recordsView[i].lastName"><br>
+                            
+                            <label for="dob">DOB: </label>
+                            <input type="date"  id="dob" [(ngModel)]="recordsView[i].DOB">
+                            <br>
+                            <label for="">Contact No.: </label>
+                             <label for="countryCode">Select a country code:</label> 
+                            <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" >
+                             <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" [(ngModel)]="recordsView[i].countryCodeForContact"> -->
+                                <!-- <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode"> 
+                                <option *ngFor=" let country of countries " [value]="country.countryCallingCode">
+                                    + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                                </option>
+                            </select>
+                            <br>
+                            <input type="number"  id="contact" [(ngModel)]="recordsView[i].contactNo">
+                            <br>
+                            <label for="">Emergency Contact No.: </label>
+                            <label for="countryCode">Select a country code:</label>
+                            <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" [(ngModel)]="recordsView[i].countryCodeForEmerContact">
+                            <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" >
+                                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                                <option *ngFor=" let country of countries " [value]="country.countryCallingCode">
+                                    + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                                </option>
+                            </select>
+                            <br>
+                            <input type="number"  id="contact" [(ngModel)]="recordsView[i].emergencyContactNo">
+                            <br>
+                             -->
+                            <!-- 
+                                <label for=""></label>
+                            <label for="countryCode">Select a country code:</label>
+                            <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" [(ngModel)]="recordsView[i].countryCodeForContact">
+                                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                                    + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                                </option>
+                            </select>
+                            <br>
+                            <label for="contact">Contact no.: </label>
+                            <input type="number"  id="contact" [(ngModel)]="recordsView[index].contactNo">
+                            <br><label for="gender">Gender: </label><br>
+                            <input type="radio" id="male" value="male" >
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" value="female" >
+                            <label for="female">Female</label>
+                            <input type="radio" id="other" value="other">
+                            <label for="other">Other</label>
+                            <br> -->
+                            <!-- <label for="gender">Gender: </label><br>
+                            <mat-radio-group [(ngModel)]="recordsView[i].gender">
+                                <mat-radio-button value="Male"> Male </mat-radio-button>
+                                <mat-radio-button value="Female"> Female</mat-radio-button>
+                                <mat-radio-button value="Other"> Other </mat-radio-button>
+                              </mat-radio-group>
+
+                            <label for="email">Email: </label>
+                            <input type="email" [(ngModel)]="recordsView[i].email" id="email">
+                            <br>
+
+                            
+                            <label for="street">Street: </label>
+                            <input type="text" [(ngModel)]="recordsView[i].street" id="street">
+                            <br>
+                            <label for="area">Area: </label>
+                            <input type="text" [(ngModel)]="recordsView[i].area" id="street">
+                            <br>
+                            <label for="address">City: </label>
+                            <input type="text" [(ngModel)]="recordsView[i].city" id="city">
+                            <br>
+                            <label for="address">State/Province: </label>
+                            <input type="text" [(ngModel)]="recordsView[i].state" id="state">
+                            <br>
+                            <label for="address">Country: </label>
+                            <input type="text" [(ngModel)]="recordsView[i].country" id="country">
+                            <br>
+                            <label for="address">Zipcode:</label>
+                            
+                            <input type="text" [(ngModel)]="recordsView[i].zipcode" id="zipcode">
+                            <br>
+                            <div id="update-buttons">
+                                <button type="submit" (click)="(letEdit[i]=!letEdit) && (visibleButton=true)">Done</button>
+                                <button type="button" (click)="recordsView.splice(i,1)">Delete Record</button>
+                            </div>
+                        </div> -->
+                  
+            <!-- </div> -->
+            
+        
+        <!-- <pagination-controls
+            responsive=true
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="handlePageChange($event)"
+        ></pagination-controls> -->
+    <!-- </div> -->
+    
+    
+        
+        
+        <!-- <button type="submit"  (click)="onSubmit()">Submit</button> 
+         <div *ngIf="letEdit">
+            <form [formGroup]="newPatientForm" > 
+                    <div>
+                        <label>MNR:  {{record.mnr}}</label><br>
+                        <label for="firstName">First Name: </label>
+                        <input type="text" id="firstName" formControlName="firstName" [(ngModel)]="recordsView[i].firstName"><br>
+                    
+                        <label for="lastName">Last Name: </label>
+                        <input type="text" id="lastName" formControlName="lastName" [(ngModel)]="recordsView[i].lastName"><br>
+                        
+                        <label for="dob">DOB: </label>
+                        <input type="date" formControlName="DOB" id="dob" [(ngModel)]="recordsView[i].DOB">
+                        <br>
+                        <label for="contact">Contact no.: </label>
+                        <input type="number" formControlName="contact" id="contact" [(ngModel)]="recordsView[i].contactNo">
+                        <br>
+                        <label for="gender">Gender: </label><br>
+                        <input type="radio" id="male" value="male" formControlName="gender">
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" value="female" formControlName="gender">
+                        <label for="female">Female</label>
+                        <input type="radio" id="other" value="other" formControlName="gender">
+                        <label for="other">Other</label>
+                        <br>
+                        <label for="email">Email: </label>
+                        <input type="email" formControlName="email" [(ngModel)]="recordsView[i].email" id="email">
+                        <br>
+                        <label for="address">Address: </label>
+                        <input type="text" formControlName="address" [(ngModel)]="recordsView[i].address" id="address">
+                        <br>
+                        <button type="submit" (click)="updateRecord(recordsView[i].mnr)">Done</button> -->
+                        
+                    <!-- </div> -->
+            <!-- </form>   -->
+        <!-- </div> -->
+ <!-- </div> -->
+<!-- </div> -->
+<footer><pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="handlePageChange($event)"
+></pagination-controls></footer>

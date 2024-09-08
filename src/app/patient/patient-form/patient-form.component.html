@@ -1,0 +1,593 @@
+<!-- <button type="button" (click)="showForm=!showForm">+ Add a New Patient</button>
+<button type="button" (click)="showList=!showList">View Patient List</button> -->
+<h1 class="my-3" id="formHeading">New Patient Form</h1>
+<!--<div class="container w-100">
+    <div class="row w-100">
+        <div class="col offset-11">
+            <button class=" w-100 btn btn-md btn-info " (click)="goBackToMainPage()">Back To Homepage</button>
+        </div>
+    </div>
+</div>-->
+<div class="container p-5 ">
+    <div class="row justify-content-center ">
+        <div class="col col-sm-9">
+           
+            <form *ngIf="newPatientForm && this.newPatientForm.get('onlyReadable')" [formGroup]="newPatientForm" class=" p-4 m-5 col col-sm-10 " disabled>
+                <!-- <h3 id="regFormHeading">Registration Form</h3> -->
+                <div class="col  p-5">
+                        <!-- FirstNAme -->
+                    <div class="row my-4">
+                        <!-- <mat-label for="firstName">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">*</span>
+                            First Name: 
+                        </mat-label> -->
+                        <label for="firstName">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">*</span>
+                            First Name: 
+                        </label>
+                        <input type="text" id="firstName" formControlName="firstName"><br>
+                
+                        
+                        
+                        
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.dirty && (this.newPatientForm.get('firstName')?.invalid)">The name is invalid! No special characters are allowed!<br></span>
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.touched && (this.newPatientForm.get('firstName')?.value=='')">this field cannot remain empty!<br></span>
+                
+                        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">This field cannot remain empty!</span> -->
+                
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <!-- Last NAme -->
+                    
+                    
+                        <div class="row my-4">
+                            <label for="lastName">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.untouched">*</span>
+                                Last Name: 
+                            </label>
+                            <input type="text" id="lastName" formControlName="lastName" [readOnly]="isReadMode"><br>
+                            
+                            
+                            
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span>
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.touched && (this.newPatientForm.get('lastName')?.value=='')">This field cannot remain empty!<br></span>
+                    
+                        </div>
+                    
+
+                    <!-- DOB -->
+                    <div class="row my-4">
+                        <label for="dob">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.untouched">*</span>
+                            DOB: 
+                        </label>
+                        <!-- <input type="date" formControlName="DOB" id="dob" [(ngModel)]="birthDate"> <br> -->
+                        <input type="date" formControlName="DOB" id="dob" > <br>
+                        <!-- <span class="errorMessage" *ngIf="(((this.newPatientForm.get('DOB')?.pristine) && (this.newPatientForm.get('DOB')?.touched) && (this.newPatientForm.get('DOB')?.invalid)) || ((this.newPatientForm.get('DOB')?.dirty) && (this.newPatientForm.get('DOB')?.invalid))) && (this.newPatientForm.get('DOB')?.value!='')">The date is invalid!Please fill all fields<br></span> -->
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.touched && this.newPatientForm.get('DOB')?.invalid">The date is invalid!Please fill all fields<br></span>
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.touched && (this.newPatientForm.get('DOB')?.value=='')">This field cannot remain empty!<br></span>
+
+                    
+                    
+
+                    <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.dirty && (this.newPatientForm.get('DOB')?.value=='')">This field cannot remain empty!<br></span> -->
+                    
+                
+                    <!-- 
+                        <span class="errorMessage" *ngIf="[(this.newPatientForm.get('DOB')?.dirty && this.newPatientForm.get('DOB')?.invalid)]">The name entered is invalid!</span> -->
+                    </div>
+                    
+                
+
+                    <!-- country code -->
+
+                    <div class="row my-4">
+                        <label for="countryCode">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.untouched">*</span>
+                            Select a country code:
+                        </label>
+                        <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" (click)="getData(this.newPatientForm.get('countryCodeForContact'))">
+                            <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                                + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                            </option>
+                        </select>
+                        <br>
+                        <!-- 
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.untouched">This field cannot remain empty!</span> -->
+                        
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.touched && (this.newPatientForm.get('countryCodeForContact')?.value=='')">Please select a country code!<br></span>
+                        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+                    </div>
+                    
+                    
+
+
+                    <!-- Contact No -->
+                    <div class="row my-4">
+                        <label for="contact">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.untouched">*</span>
+                            Contact no.: 
+                        </label>
+                        <input type="text" formControlName="contactNo" id="contact" placeholder="XXXXXXXXXX(10 digits)">
+                        <br>
+                        
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.dirty && this.newPatientForm.get('contactNo')?.invalid">Incorrect Pattern!<br></span>
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.touched && (this.newPatientForm.get('contactNo')?.value=='')">this field cannot remain empty!<br></span>
+                        
+                        
+                        
+                        
+                        <!-- 
+                            <span *ngIf()="notAnAdult()"> -->
+                        <!--<br> <div #emergencyContactDiv> -->
+                        <!-- <ng-content [ngIf]="notAnAdult()"> -->
+                    </div>
+                    
+
+                        <!-- Emergency contact No. and code -->
+                    <div *ngIf="notAnAdult()||isNotAnAdult" class="p-3 " id="emergencyContactDiv">
+                        <!-- Country code -->
+                        <h6>Emergency Contact</h6>
+                        <div class="row my-4">
+                            <label for="countryCode">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForEmerContact')?.untouched">*</span>
+                                Select a country code:
+                            </label>
+                            <select name="countryCode" id="emerCountryCode" formControlName="countryCodeForEmerContact">
+                                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                                    + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                                </option>
+                            </select><br>
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForEmerContact')?.touched && (this.newPatientForm.get('countryCodeForEmerContact')?.value=='')">Please select a country code!<br></span>
+                        </div>
+                        
+                        
+
+
+                        <!-- Emergency contact No. field -->
+                        <div class="row my-4">
+                            <label for="emergencyContact">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.untouched">*</span>
+                                Emergency Contact no.: 
+                            </label>
+                            <input type="text" formControlName="emergencyContactNo" id="emergencyContact" placeholder="XXXXXXXXXX(10 digits)">
+                            <br>
+                            
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.dirty && this.newPatientForm.get('emergencyContactNo')?.invalid">Incorrect Pattern!<br></span>
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.touched && (this.newPatientForm.get('emergencyContactNo')?.value=='')">This field cannot remain empty!<br></span>
+                        </div>
+                        
+                        
+                        
+                        
+                    
+                    <!-- </ng-content> -->
+                    </div>
+                    <!-- </span> -->
+                    <br>
+
+
+                    <!-- Gender -->
+                    <div class="row my-4">
+                        <label for="gender">
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('gender')?.untouched">*</span>
+                            Gender: 
+                        </label>
+                        <!-- <input type="radio" id="male" value="male" formControlName="gender">
+                        <label for="male">Male
+
+                        </label>
+                        <input type="radio" id="female" value="female" formControlName="gender">
+                        <label for="female">Female
+
+                        </label>
+                        <input type="radio" id="other" value="other" formControlName="gender">
+                        <label for="other">Other
+
+                        </label>
+                        <br> -->
+                        
+                        <select name="gender" id="gender"  formControlName="gender">
+                            
+                            <option *ngFor="let opts of genderOptions">{{opts.label}}</option>
+                            <!-- <option value="Female">Female</option>
+                            <option value="Other">Other</option> -->
+                        </select><br>
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('gender')?.touched && (this.newPatientForm.get('gender')?.value=='')">Please select an option!<br></span>
+                    </div>
+                    
+
+                    <!-- Email -->
+                    <div class="row my-4">
+                        <label for="email" >
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.untouched">*</span>
+                        Email: 
+                    </label>
+                        <input type="email"  formControlName="email" id="email">
+                        <br>
+                    
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.touched && (this.newPatientForm.get('email')?.value=='')">This field cannot remain empty!<br></span>
+
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.dirty && this.newPatientForm.get('email')?.invalid">Incorrect Pattern!<br></span>
+                        
+                        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.dirty &&this.newPatientForm.get('email')?.hasError('uniqueEmail') && this.newPatientForm.get('email')?.invalid">This email is already in the system!<br></span>
+
+                    </div>
+                                
+                    <!-- Address -->
+
+                    
+                    <div id="adddress">
+                        <h4>Address</h4>
+                    <!-- Street -->
+                        <div class="row my-4">
+                            <label for="street">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.untouched">*</span>
+                                Street: 
+                            </label>
+                            <input type="text" formControlName="street" id="street">
+                            <br>
+                            
+                            
+                            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.dirty && (this.newPatientForm.get('street')?.invalid)">This street address is invalid!<br></span> -->
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.touched && (this.newPatientForm.get('street')?.value=='')">This field cannot remain empty!<br></span>
+                        </div>
+                        
+                
+                        <!-- Area -->
+                        <div class="row my-4">
+                            <label for="area">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.untouched">*</span>
+                                Area: 
+                            </label>
+                            <input type="text" formControlName="area" id="area">
+                            <br>
+                            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.dirty && (this.newPatientForm.get('area')?.value=='')">This field cannot remain empty!<br></span> -->
+                            <!--Invalidity??? <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.dirty && (this.newPatientForm.get('area')?.invalid)">Invalid! No special characters are allowed!<br></span> -->
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.touched && (this.newPatientForm.get('area')?.value=='')">This field cannot remain empty!<br></span>
+                        </div>
+                        
+                
+                        <!-- City -->
+                        <div class="row my-4">
+                            <label for="city">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.untouched">*</span>
+                                City: 
+                            </label>
+                            <input type="text" formControlName="city" id="city">
+                            <br>
+                            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.dirty && (this.newPatientForm.get('city')?.value=='')">This field cannot remain empty!<br></span> -->
+                            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.touched && (this.newPatientForm.get('city')?.value=='')">This field cannot remain empty!<br></span>
+                        </div>
+                        
+                
+                            <!-- State -->
+                            <div class="row my-4">
+                                <label for="state">
+                                    <span class="errorMessage" *ngIf="this.newPatientForm.get('state')?.untouched">*</span>
+                                    State/Province: 
+                                </label>
+                                <input type="text" formControlName="state" id="state"><br>
+                                <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('state')?.touched && (this.newPatientForm.get('state')?.value=='')">This field cannot remain empty!<br></span>
+                            </div>
+                        
+                
+                        
+                        <!-- country -->
+                        <div class="row my-4">
+                            <label for="country">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.untouched">*</span>
+                                Country: 
+                            </label>
+                    
+                            <select name="countryName" id="countryName" formControlName="country">
+                                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryNameEn">
+                                {{country.countryNameEn}}
+                                </option>
+                            </select>
+                            
+                            <br>
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.touched && (this.newPatientForm.get('country')?.value=='')">Please select an option!<br></span>
+                            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.dirty && (this.newPatientForm.get('firstName')?.value=='')">This field cannot remain empty!<br></span> -->
+                        </div>
+                        
+                        
+                        <!-- Zipcode -->
+                        <div class="row my-4">
+                            <label for="zipcode">
+                                <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.untouched">*</span>
+                                Zipcode: 
+                            </label>
+                            <input type="text" formControlName="zipcode" id="zipcode"><br>
+                            
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.touched && (this.newPatientForm.get('zipcode')?.value=='')">This field cannot remain empty!<br></span>
+                            <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.dirty && this.newPatientForm.get('zipcode')?.invalid">Only digits are allowed!<br></span>
+
+                        </div>
+                        
+                
+
+                    </div>
+
+                            
+                        <br>
+                        <div class="row my-4">
+                            <button type="submit" id="formSubmitButton" (click)="onSubmit()   ">Submit</button>
+                        <!-- <button type="submit" id="formApplyChangesButton" (click)="applyChanges()" hidden>Apply Changes</button> -->
+                        <!-- <button type="submit" id="formApplyChangesButton"  hidden>Apply Changes</button> -->
+                    
+                        </div>
+                </div>
+    
+            </form>
+
+        </div>
+    </div>
+    
+</div>
+    <!-- <form *ngIf="newPatientForm && this.newPatientForm.get('onlyReadable')" [formGroup]="newPatientForm" class="p-4 m-5 col col-sm-8">
+        <h3 >Registration Form</h3>
+        <div>
+            FirstNAme 
+        <label for="firstName">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">*</span>
+            First Name: 
+        </label>
+        <input type="text" id="firstName" formControlName="firstName"><br>
+
+        
+        
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.dirty && (this.newPatientForm.get('firstName')?.invalid)">The name is invalid! No special characters are allowed!<br></span>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.touched && (this.newPatientForm.get('firstName')?.value=='')">this field cannot remain empty!<br></span>
+
+         <span class="errorMessage" *ngIf="this.newPatientForm.get('firstName')?.untouched">This field cannot remain empty!</span> 
+
+             Last NAme 
+        <label for="lastName">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.untouched">*</span>
+            Last Name: 
+        </label>
+        <input type="text" id="lastName" formControlName="lastName" [readOnly]="isReadMode"><br>
+        
+        
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.touched && (this.newPatientForm.get('lastName')?.value=='')">This field cannot remain empty!<br></span>
+
+
+        DOB
+        <label for="dob">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.untouched">*</span>
+            DOB: 
+        </label>
+        <input type="date" formControlName="DOB" id="dob" [(ngModel)]="birthDate"> <br>
+        <input type="date" formControlName="DOB" id="dob" > <br>
+         <span class="errorMessage" *ngIf="(((this.newPatientForm.get('DOB')?.pristine) && (this.newPatientForm.get('DOB')?.touched) && (this.newPatientForm.get('DOB')?.invalid)) || ((this.newPatientForm.get('DOB')?.dirty) && (this.newPatientForm.get('DOB')?.invalid))) && (this.newPatientForm.get('DOB')?.value!='')">The date is invalid!Please fill all fields<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.touched && this.newPatientForm.get('DOB')?.invalid">The date is invalid!Please fill all fields<br></span>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.touched && (this.newPatientForm.get('DOB')?.value=='')">This field cannot remain empty!<br></span> -->
+
+        
+        
+
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('DOB')?.dirty && (this.newPatientForm.get('DOB')?.value=='')">This field cannot remain empty!<br></span> -->
+        
+       
+        <!-- 
+            <span class="errorMessage" *ngIf="[(this.newPatientForm.get('DOB')?.dirty && this.newPatientForm.get('DOB')?.invalid)]">The name entered is invalid!</span> -->
+       
+
+        <!-- country code -->
+        
+        <!-- <label for="countryCode">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.untouched">*</span>
+            Select a country code:
+        </label>
+        <select name="countryCode" id="countrycode" formControlName="countryCodeForContact" (click)="getData(this.newPatientForm.get('countryCodeForContact'))">
+            <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                + {{country.countryCallingCode}}  {{country.countryNameEn}}
+            </option>
+        </select><br> -->
+
+        <!-- 
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.untouched">This field cannot remain empty!</span> -->
+        
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForContact')?.touched && (this.newPatientForm.get('countryCodeForContact')?.value=='')">Please select a country code!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+
+
+        <!-- Contact No -->
+        <!-- <label for="contact">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.untouched">*</span>
+            Contact no.: 
+        </label>
+        <input type="text" formControlName="contactNo" id="contact" placeholder="XXXXXXXXXX(10 digits)">
+        <br>
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.dirty && this.newPatientForm.get('contactNo')?.invalid">Incorrect Pattern!<br></span>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('contactNo')?.touched && (this.newPatientForm.get('contactNo')?.value=='')">this field cannot remain empty!<br></span>
+        
+         -->
+        
+        
+         <!-- 
+            <span *ngIf()="notAnAdult()"> -->
+        <!--<br> <div #emergencyContactDiv> -->
+        <!-- <ng-content [ngIf]="notAnAdult()"> -->
+
+            <!-- Emergency contact No. and code -->
+        <!-- <div *ngIf="notAnAdult()" class="p-3 ">
+             Country code -->
+            <!-- <h6>Emergency Contact</h6>
+            <label for="countryCode">
+                <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForEmerContact')?.untouched">*</span>
+                Select a country code:</label>
+            <select name="countryCode" id="emerCountryCode" formControlName="countryCodeForEmerContact">
+                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryCallingCode">
+                    + {{country.countryCallingCode}}  {{country.countryNameEn}}
+                </option>
+            </select><br>
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('countryCodeForEmerContact')?.touched && (this.newPatientForm.get('countryCodeForEmerContact')?.value=='')">Please select a country code!<br></span> -->
+             
+
+
+            <!-- Emergency contact No. field -->
+            <!-- <label for="emergencyContact">
+                <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.untouched">*</span>
+                Emergency Contact no.: </label>
+            <input type="text" formControlName="emergencyContactNo" id="emergencyContact" placeholder="XXXXXXXXXX(10 digits)">
+            
+            
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.dirty && this.newPatientForm.get('emergencyContactNo')?.invalid">Incorrect Pattern!<br></span>
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('emergencyContactNo')?.touched && (this.newPatientForm.get('emergencyContactNo')?.value=='')">This field cannot remain empty!<br></span> -->
+            
+            
+            
+        
+        <!-- </ng-content> -->
+        <!-- </div> -->
+        <!-- </span> -->
+        <!-- <br> -->
+
+
+        <!-- Gender Make a drop down -->
+        <!-- <label for="gender">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('gender')?.untouched">*</span>
+            Gender: </label> -->
+        <!-- <input type="radio" id="male" value="male" formControlName="gender">
+        <label for="male">Male</label>
+        <input type="radio" id="female" value="female" formControlName="gender">
+        <label for="female">Female</label>
+        <input type="radio" id="other" value="other" formControlName="gender">
+        <label for="other">Other</label>
+        <br> -->
+         <!--         
+        <select name="gender" id="gender" formControlName="gender">
+            
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('gender')?.touched && (this.newPatientForm.get('gender')?.value=='')">Please select an option!<br></span>
+
+         Email -->
+        <!-- <label for="email" >
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.untouched">*</span>
+            Email: </label>
+        <input type="email"  formControlName="email" id="email">
+        <br>
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.touched && (this.newPatientForm.get('email')?.value=='')">This field cannot remain empty!<br></span>
+
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.dirty && this.newPatientForm.get('email')?.invalid">Incorrect Pattern!<br></span>
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('email')?.dirty &&this.newPatientForm.get('email')?.hasError('uniqueEmail') && this.newPatientForm.get('email')?.invalid">This email is already in the system!<br></span> --> 
+        
+        <!-- Address -->
+
+        <!-- Street
+        <label for="street">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.untouched">*</span>
+            Street: </label>
+        <input type="text" formControlName="street" id="street">
+        <br> -->
+        
+        
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.dirty && (this.newPatientForm.get('street')?.invalid)">This street address is invalid!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('street')?.touched && (this.newPatientForm.get('street')?.value=='')">This field cannot remain empty!<br></span>
+
+        Area -->
+        <!-- <label for="area">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.untouched">*</span>
+            Area: </label>
+        <input type="text" formControlName="area" id="area">
+        <br>
+         <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.dirty && (this.newPatientForm.get('area')?.value=='')">This field cannot remain empty!<br></span> -->
+        
+        <!--Invalidity??? <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.dirty && (this.newPatientForm.get('area')?.invalid)">Invalid! No special characters are allowed!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('area')?.touched && (this.newPatientForm.get('area')?.value=='')">This field cannot remain empty!<br></span> --> 
+
+        <!-- City -->
+        <!-- <label for="city"> -->
+            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.untouched">*</span> -->
+            <!-- City: </label> -->
+        <!-- <input type="text" formControlName="city" id="city"> -->
+        <!-- <br> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.dirty && (this.newPatientForm.get('city')?.value=='')">This field cannot remain empty!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('city')?.touched && (this.newPatientForm.get('city')?.value=='')">This field cannot remain empty!<br></span> -->
+
+            <!-- State -->
+        <!-- <label for="state"> -->
+            <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('state')?.untouched">*</span> -->
+            <!-- State/Province: </label> -->
+        <!-- <input type="text" formControlName="state" id="state"><br> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('lastName')?.dirty && (this.newPatientForm.get('lastName')?.invalid)">The name is invalid! No special characters are allowed!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('state')?.touched && (this.newPatientForm.get('state')?.value=='')">This field cannot remain empty!<br></span> -->
+
+        
+        <!-- country -->
+        <!-- <label for="country">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.untouched">*</span>
+            Country: </label>
+
+            <select name="countryName" id="countryName" formControlName="country">
+                <option *ngFor=" let country of countries ; let i=index" [value]="country.countryNameEn">
+                {{country.countryNameEn}}
+            </option>
+            </select>
+        
+        <br>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.touched && (this.newPatientForm.get('country')?.value=='')">Please select an option!<br></span> -->
+        <!-- <span class="errorMessage" *ngIf="this.newPatientForm.get('country')?.dirty && (this.newPatientForm.get('firstName')?.value=='')">This field cannot remain empty!<br></span> -->
+        
+        <!-- Zipcode -->
+        <!-- <label for="zipcode">
+            <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.untouched">*</span>
+            Zipcode: </label>
+        <input type="number" formControlName="zipcode" id="zipcode"><br>
+        
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.touched && (this.newPatientForm.get('zipcode')?.value=='')">This field cannot remain empty!<br></span>
+        <span class="errorMessage" *ngIf="this.newPatientForm.get('zipcode')?.dirty && this.newPatientForm.get('zipcode')?.invalid">Only digits are allowed!<br></span>
+        
+        <br>
+        <button type="submit" (click)="onSubmit()   ">Submit</button>
+    
+    </div> -->
+    <!-- </form> --> 
+    
+    
+
+<!-- <div *ngIf="showList">
+    <div *ngFor="let record of records ; let i=index">
+    <ul>
+        <li>{{record.mnr}}</li>
+        <li>{{record.firstName}}  {{record.lastName}}</li>
+        <li>{{record.gender}}</li>
+        <li>{{record.email}}</li>
+        <button type="button" >Edit</button>
+    </ul>
+    <div>
+        <label>MNR: {{record.mnr}}</label>
+        <br>
+        <label>First Name: </label>
+         <input type="text" [(ngModel)]="records[i].firstName"> -->
+        <!-- <input type="text">
+    </div>
+    </div>
+</div> --> 
+<!-- to edit and to delte the record -->
+
+
+
+
