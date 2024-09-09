@@ -3,7 +3,7 @@ export const environment=
     production: false,
     firebaseConfig :
     {
-        apiKey: "AIzaSyBis1knqFxPPcD1uZWHzSEGy2sXaVdvXxs",
+        apiKey: "",
         authDomain: "",
         databaseURL: "https://users-database-6baa2-default-rtdb.firebaseio.com",
         projectId: "users-database-6baa2",
